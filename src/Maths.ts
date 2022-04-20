@@ -1,7 +1,6 @@
 import { makePerspective } from "parsegraph-matrix";
 
-const TestSuite = require("parsegraph-testsuite").default;
-const fuzzyEquals = require("parsegraph-fuzzyequals").default;
+import fuzzyEquals from "parsegraph-fuzzyequals";
 /* eslint-disable require-jsdoc, prefer-spread, new-cap */
 // Maths VERSION: 1.8.130828
 
@@ -45,7 +44,7 @@ export const alphaToDegrees = alphatoDegrees;
 // ----------------------------------------------
 // ----------------------------------------------
 
-export function AlphaVector(...args) {
+export function AlphaVector(...args:number[]) {
   this[0] = 0;
   this[1] = 0;
   this[2] = 0;
