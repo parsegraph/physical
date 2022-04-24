@@ -503,7 +503,6 @@ export default class AlphaRMatrix4 {
     this[12] = r4.dotProduct(c1);
     this[13] = r4.dotProduct(c2);
     this[14] = r4.dotProduct(c3);
-    console.log(this);
 
     return this;
   }

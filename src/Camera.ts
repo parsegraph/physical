@@ -89,7 +89,7 @@ export default class AlphaCamera implements Physical {
   restore(json: any) {
     this.position.restore(json.position);
     this.orientation.restore(json.orientation);
-    console.log(this.toJSON());
+    //console.log(this.toJSON());
   }
 
   // ----------------------------------------------
