@@ -1,7 +1,7 @@
 import { assert } from "chai";
 import fuzzyEquals from "parsegraph-fuzzyequals";
 import { makePerspective } from "parsegraph-matrix";
-import {AlphaVector } from "./Maths";
+import { AlphaVector } from "./Maths";
 
 describe("Package", function () {
   it("works", () => {
@@ -443,4 +443,3 @@ alphaRMatrix4Tests.addTest(
     }
   }
 );
-

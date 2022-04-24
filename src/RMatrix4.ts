@@ -1,4 +1,4 @@
-import {FUZZINESS} from "./settings";
+import { FUZZINESS } from "./settings";
 import AlphaQuaternion from "./Quaternion";
 import AlphaVector from "./Vector";
 
@@ -12,25 +12,25 @@ import AlphaVector from "./Vector";
     let r4 = new AlphaQuaternion(this[12], this[13], this[14], this[15]);
 */
 export default class AlphaRMatrix4 {
-  "0":number;
-  "1":number;
-  "2":number;
-  "3":number;
-  "4":number;
-  "5":number;
-  "6":number;
-  "7":number;
-  "8":number;
-  "9":number;
-  "10":number;
-  "11":number;
-  "12":number;
-  "13":number;
-  "14":number;
-  "15":number;
-  "16":number;
+  "0": number;
+  "1": number;
+  "2": number;
+  "3": number;
+  "4": number;
+  "5": number;
+  "6": number;
+  "7": number;
+  "8": number;
+  "9": number;
+  "10": number;
+  "11": number;
+  "12": number;
+  "13": number;
+  "14": number;
+  "15": number;
+  "16": number;
   length: number;
-  constructor(...args:any) {
+  constructor(...args: any) {
     this.length = 16;
     if (args.length == 0) {
       this.set(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
@@ -39,15 +39,15 @@ export default class AlphaRMatrix4 {
     }
   }
 
-  restore(json:any) {
+  restore(json: any) {
     this.set.apply(this, json);
-  };
+  }
 
   toJSON() {
     return this.toArray();
-  };
+  }
 
-  toDom(reference?:AlphaRMatrix4) {
+  toDom(reference?: AlphaRMatrix4) {
     const tableDom = document.createElement("table");
 
     for (let i = 0; i < 4; ++i) {
@@ -81,13 +81,13 @@ export default class AlphaRMatrix4 {
     }
 
     return tableDom;
-  };
+  }
 
-  setIndex(i:number, val:number) {
+  setIndex(i: number, val: number) {
     (this as any)[i] = val;
   }
 
-  set(...args:any) {
+  set(...args: any) {
     if (args.length == 1) {
       // All components passed in a single argument.
       for (let i = 0; i < this.length; ++i) {
@@ -101,13 +101,13 @@ export default class AlphaRMatrix4 {
     }
 
     return this;
-  };
+  }
 
-  get(i:number) {
+  get(i: number) {
     return (this as any)[i];
   }
 
-  equals(...args:any) {
+  equals(...args: any) {
     if (args.length > 1) {
       for (let i = 0; i < this.length; ++i) {
         if (Math.abs(this.get(i) - args[i]) > FUZZINESS) {
@@ -126,13 +126,13 @@ export default class AlphaRMatrix4 {
 
     // Equals.
     return true;
-  };
+  }
 
   clone() {
     return new AlphaRMatrix4(this);
-  };
+  }
 
-  multiply(other:AlphaRMatrix4|number) {
+  multiply(other: AlphaRMatrix4 | number) {
     if (typeof other == "number") {
       // multiply by the scalar value.
       const s = other as number;
@@ -184,9 +184,9 @@ export default class AlphaRMatrix4 {
       r4.dotProduct(c3),
       r4.dotProduct(c4)
     );
-  };
+  }
 
-  transform(...args:any[]) {
+  transform(...args: any[]) {
     let x;
     let y;
     let z;
@@ -229,18 +229,18 @@ export default class AlphaRMatrix4 {
       this[8] * x + this[9] * y + this[10] * z + this[11] * w,
       this[12] * x + this[13] * y + this[14] * z + this[15] * w
     );
-  };
+  }
 
-  multiplied(...args:any) {
+  multiplied(...args: any) {
     const rv = this.clone();
     return rv.multiply.apply(rv, args);
-  };
+  }
 
   identity() {
     return this.set(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
-  };
+  }
 
-  scale(...args:any) {
+  scale(...args: any) {
     // Retrieve arguments.
     let x;
     let y;
@@ -266,9 +266,9 @@ export default class AlphaRMatrix4 {
     this.set(m);
 
     return this;
-  };
+  }
 
-  translate(...args:any) {
+  translate(...args: any) {
     // Retrieve arguments.
     let x;
     let y;
@@ -293,9 +293,9 @@ export default class AlphaRMatrix4 {
     this.set(m);
 
     return this;
-  };
+  }
 
-  rotate(...args:any) {
+  rotate(...args: any) {
     // Retrieve arguments.
     let x;
     let y;
@@ -342,7 +342,7 @@ export default class AlphaRMatrix4 {
     this.set(r);
 
     return this;
-  };
+  }
 
   transpose() {
     return this.set(
@@ -363,10 +363,10 @@ export default class AlphaRMatrix4 {
       this[11],
       this[15]
     );
-  };
+  }
 
   toString() {
-    const line = function (a:number, b:number, c:number, d:number) {
+    const line = function (a: number, b: number, c: number, d: number) {
       return [a, b, c, d].join(", ");
     };
 
@@ -380,9 +380,9 @@ export default class AlphaRMatrix4 {
       ].join(",\n") +
       "]"
     );
-  };
+  }
 
-  fromEuler(...args:any) {
+  fromEuler(...args: any) {
     // Retrieve arguments.
     let x;
     let y;
@@ -424,9 +424,9 @@ export default class AlphaRMatrix4 {
     );
 
     return this;
-  };
+  }
 
-  fromQuaternion(...args:any) {
+  fromQuaternion(...args: any) {
     // Retrieve arguments.
     let x;
     let y;
@@ -475,22 +475,22 @@ export default class AlphaRMatrix4 {
       0,
       1
     );
-  };
+  }
 
   // equivalent to rotationMatrix * translationMatrix;
-  fromQuaternionAtVector(vector:AlphaVector, quat:AlphaQuaternion) {
+  fromQuaternionAtVector(vector: AlphaVector, quat: AlphaQuaternion) {
     this.fromQuaternion(quat);
     this[12] = vector[0];
     this[13] = vector[1];
     this[14] = vector[2];
 
     return this;
-  };
+  }
 
   // equivalent to
   // translationMatrix * rotationMatrix
   // the 4th value in this matrix multplication always end up as 0
-  fromVectorAroundQuaternion(vector:AlphaVector, quat:AlphaQuaternion) {
+  fromVectorAroundQuaternion(vector: AlphaVector, quat: AlphaQuaternion) {
     // set our 3x3 rotation matrix
     this.fromQuaternion(quat);
 
@@ -506,12 +506,12 @@ export default class AlphaRMatrix4 {
     console.log(this);
 
     return this;
-  };
+  }
 
   fromVectorAroundQuaternionAtVector(
-    position:AlphaVector,
-    rotation:AlphaQuaternion,
-    offset:any
+    position: AlphaVector,
+    rotation: AlphaQuaternion,
+    offset: any
   ) {
     // rotation * translation;
     this.fromQuaternionAtVector(offset, rotation);
@@ -527,12 +527,12 @@ export default class AlphaRMatrix4 {
     this[14] = r4.dotProduct(c3);
 
     return this;
-  };
+  }
 
   inverse() {
     const inv = this.inversed();
     return this.set(inv);
-  };
+  }
 
   inversed() {
     const inv = new AlphaRMatrix4();
@@ -667,7 +667,10 @@ export default class AlphaRMatrix4 {
       this[8] * this[2] * this[5];
 
     let det =
-      this[0] * inv[0] + this[1] * inv[4] + this[2] * inv[8] + this[3] * inv[12];
+      this[0] * inv[0] +
+      this[1] * inv[4] +
+      this[2] * inv[8] +
+      this[3] * inv[12];
 
     if (det == 0) {
       throw new Error("Determinate in Matrix.inverse cannot be 0");
@@ -679,7 +682,7 @@ export default class AlphaRMatrix4 {
     }
 
     return inv;
-  };
+  }
 
   toArray() {
     return [
@@ -700,12 +703,12 @@ export default class AlphaRMatrix4 {
       this[14],
       this[15],
     ];
-  };
+  }
 }
 
-let alphaRMatrix4Scratch:AlphaRMatrix4 = null;
+let alphaRMatrix4Scratch: AlphaRMatrix4 = null;
 
-export function alphaRMatrix4FromVectorAroundQuaternionAtVector(...args:any) {
+export function alphaRMatrix4FromVectorAroundQuaternionAtVector(...args: any) {
   const m = new AlphaRMatrix4();
   return m.fromVectorAroundQuaternionAtVector.apply(m, args);
 }
@@ -719,22 +722,22 @@ export function alphaGetScratchMatrix() {
   return alphaRMatrix4Scratch;
 }
 
-export function alphaRMatrix4FromEuler(...args:any) {
+export function alphaRMatrix4FromEuler(...args: any) {
   const m = new AlphaRMatrix4();
   return m.fromEuler.apply(m, args);
 }
 
-export function alphaRMatrix4FromQuaternion(...args:any) {
+export function alphaRMatrix4FromQuaternion(...args: any) {
   const m = new AlphaRMatrix4();
   return m.fromQuaternion.apply(m, args);
 }
 
-export function alphaRMatrix4FromQuaternionAtVector(...args:any) {
+export function alphaRMatrix4FromQuaternionAtVector(...args: any) {
   const m = new AlphaRMatrix4();
   return m.fromQuaternionAtVector.apply(m, args);
 }
 
-export function alphaRMatrix4FromVectorAroundQuaternion(...args:any) {
+export function alphaRMatrix4FromVectorAroundQuaternion(...args: any) {
   const m = new AlphaRMatrix4();
   return m.fromVectorAroundQuaternion.apply(m, args);
 }

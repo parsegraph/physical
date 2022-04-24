@@ -86,7 +86,7 @@ export default class AlphaCamera implements Physical {
     };
   }
 
-  restore(json:any) {
+  restore(json: any) {
     this.position.restore(json.position);
     this.orientation.restore(json.orientation);
     console.log(this.toJSON());
@@ -98,12 +98,12 @@ export default class AlphaCamera implements Physical {
 
   // -- we set FOV in degrees
   // -- we get in radians;
-  setFovX(fovX:number) {
+  setFovX(fovX: number) {
     this.fovX = toRadians(fovX);
     this.projectionDirty = true;
   }
 
-  setFovY(fovY:number) {
+  setFovY(fovY: number) {
     this.fovY = toRadians(fovY);
     this.projectionDirty = true;
   }
@@ -135,13 +135,13 @@ export default class AlphaCamera implements Physical {
   // width = width of the viewport
   // distance = distance of eyes from viewport
   // use the same units for both;
-  setProperFOV(vpWidth:number, eyeDistance:number) {
+  setProperFOV(vpWidth: number, eyeDistance: number) {
     const fovx = Math.atan((vpWidth * 0.5) / eyeDistance) * 2;
     this.setFovY(0); // set this to autoadjust;
     this.setFovX(toDegrees(fovx)); // and set this to the proper fov;
   }
 
-  setZoom(factor:number) {
+  setZoom(factor: number) {
     if (factor < 1) {
       return false; // assholes
     }
@@ -155,12 +155,12 @@ export default class AlphaCamera implements Physical {
     return this.zoomFactor;
   }
 
-  setZoomSpeed(speed:number) {
+  setZoomSpeed(speed: number) {
     this.zoomSpeed = speed;
     return this.zoomSpeed;
   }
 
-  zoomIn(bind:number, elapsed:number) {
+  zoomIn(bind: number, elapsed: number) {
     if (!bind || bind <= 0) {
       return false;
     } else if (bind > 1) {
@@ -174,7 +174,7 @@ export default class AlphaCamera implements Physical {
     return this.setZoom(zoom);
   }
 
-  zoomOut(bind:number, elapsed:number) {
+  zoomOut(bind: number, elapsed: number) {
     if (!bind || !elapsed) {
       return false;
     }
@@ -198,7 +198,7 @@ export default class AlphaCamera implements Physical {
 
   // continues to zoom until the zoom is reached;
   // broken until I am less tired
-  zoomUntil(zoom:number, bind:number, elapsed:number) {
+  zoomUntil(zoom: number, bind: number, elapsed: number) {
     if (!zoom || !bind || !elapsed) {
       return false;
     }
@@ -220,7 +220,7 @@ export default class AlphaCamera implements Physical {
   }
 
   // anything further than this is clipped
-  setFarDistance(distance:number) {
+  setFarDistance(distance: number) {
     this.farDistance = distance;
     this.projectionDirty = true;
   }
@@ -230,7 +230,7 @@ export default class AlphaCamera implements Physical {
   }
 
   // anything nearer than this is clipped
-  setNearDistance(distance:number) {
+  setNearDistance(distance: number) {
     this.nearDistance = distance;
     this.projectionDirty = true;
   }
@@ -239,7 +239,7 @@ export default class AlphaCamera implements Physical {
     return this.nearDistance;
   }
 
-  updateProjection(width:number, height:number) {
+  updateProjection(width: number, height: number) {
     this.width = width;
     this.height = height;
 
@@ -259,7 +259,7 @@ export default class AlphaCamera implements Physical {
   // ------------ Rotation ---------------
   // -------------------------------------
 
-  setOrientation(...args:any) {
+  setOrientation(...args: any) {
     this.orientation.set(this.orientation, ...args);
     this.modelDirty = true;
   }
@@ -270,7 +270,7 @@ export default class AlphaCamera implements Physical {
   }
 
   // in radians / second
-  setRotationSpeeds(x:number, y:number) {
+  setRotationSpeeds(x: number, y: number) {
     const rSpeed = this.rotationSpeed;
     rSpeed[0] = x;
     rSpeed[1] = y;
@@ -281,13 +281,13 @@ export default class AlphaCamera implements Physical {
     return rSpeed;
   }
 
-  setRotationSpeed(speed:number) {
+  setRotationSpeed(speed: number) {
     const rSpeed = this.rotationSpeed;
     rSpeed[0] = speed;
     rSpeed[1] = speed;
   }
 
-  pitch(angle:number) {
+  pitch(angle: number) {
     // if you aren't rotating about an angle, then you aren't rotating
     if (angle == 0) {
       return;
@@ -323,7 +323,7 @@ export default class AlphaCamera implements Physical {
     this.setOrientation(this.orientation.multiplied(q));
   }
 
-  turn(angle:number) {
+  turn(angle: number) {
     // if you aren't rotating about an angle, then you aren't rotating
     if (angle == 0) {
       return;
@@ -335,17 +335,17 @@ export default class AlphaCamera implements Physical {
   }
 
   // these rotations take place at the speeds set by rotationSpeed
-  turnLeft(elapsed:number) {
+  turnLeft(elapsed: number) {
     const angle = elapsed * this.rotationSpeed[1];
     this.turn(angle);
   }
 
-  turnRight(elapsed:number) {
+  turnRight(elapsed: number) {
     const angle = elapsed * this.rotationSpeed[1];
     this.turn(-angle);
   }
 
-  pitchUp(elapsed:number) {
+  pitchUp(elapsed: number) {
     const angle = elapsed * this.rotationSpeed[0];
     if (angle !== 0) {
       // console.log("Pitch up " + angle);
@@ -353,7 +353,7 @@ export default class AlphaCamera implements Physical {
     }
   }
 
-  pitchDown(elapsed:number) {
+  pitchDown(elapsed: number) {
     const angle = elapsed * this.rotationSpeed[0];
     if (angle !== 0) {
       // console.log("Pitch down " + angle);
@@ -362,7 +362,7 @@ export default class AlphaCamera implements Physical {
   }
 
   // set which axis you want to align to
-  alignParentToMy(x:number, y:number) {
+  alignParentToMy(x: number, y: number) {
     let q = new AlphaQuaternion();
     if (x == 0) {
       x = 0;
@@ -420,21 +420,17 @@ export default class AlphaCamera implements Physical {
   // -------------------------------------
 
   // send as x,y,z or vector
-  setPosition(...args:any[]) {
+  setPosition(...args: any[]) {
     // console.log(new Error("Setting position to " + x + " " + y + " " + z));
     if (args.length === 1) {
-      this.position.set(
-        args[0][1],
-        args[0][2],
-        args[0][0]
-      );
+      this.position.set(args[0][1], args[0][2], args[0][0]);
     }
     this.position.set(args[0], args[1], args[2]);
     this.modelDirty = true;
     return this.position;
   }
 
-  setRange(range:any) {
+  setRange(range: any) {
     return this.setPosition(0, 0, range);
   }
 
@@ -443,7 +439,7 @@ export default class AlphaCamera implements Physical {
     return this.position;
   }
 
-  changePosition(x:any, y:any, z:any) {
+  changePosition(x: any, y: any, z: any) {
     if (y === undefined) {
       y = x[1];
       z = x[2];
@@ -453,8 +449,8 @@ export default class AlphaCamera implements Physical {
   }
 
   // offset from the physical
-  setOffset(...args:any[]) {
-    let x,y, z:number;
+  setOffset(...args: any[]) {
+    let x, y, z: number;
     if (args.length === 1) {
       y = args[0][1];
       z = args[0][2];
@@ -473,7 +469,7 @@ export default class AlphaCamera implements Physical {
     return this.offset;
   }
 
-  changeOffset(...args:any) {
+  changeOffset(...args: any) {
     let x, y, z: number;
     if (args.length === 1) {
       y = args[0][1];
@@ -491,7 +487,7 @@ export default class AlphaCamera implements Physical {
   // -----------  MOVEMENT --------------------
   // ------------------------------------------
 
-  setMaxRange(maxRange:number) {
+  setMaxRange(maxRange: number) {
     this.maxRange = maxRange;
     return this.maxRange;
   }
@@ -501,7 +497,7 @@ export default class AlphaCamera implements Physical {
   }
 
   // camera movement is easy; it can only move in and out
-  warp(distance:number) {
+  warp(distance: number) {
     const z = this.position[2];
 
     // preventing tons of tiny adjustments
@@ -524,11 +520,11 @@ export default class AlphaCamera implements Physical {
     this.changePosition(0, 0, distance);
   }
 
-  warpIn(distance:number) {
+  warpIn(distance: number) {
     this.warp(-distance);
   }
 
-  warpOut(distance:number) {
+  warpOut(distance: number) {
     this.warp(distance);
   }
   // alias for end-user use
@@ -540,7 +536,7 @@ export default class AlphaCamera implements Physical {
   // -- since we can only move in one direction
   // -- there isn't any velocity
   // -- these are the commands needed for expected movement
-  setSpeed(speed:number) {
+  setSpeed(speed: number) {
     this.speed = speed;
   }
 
@@ -548,12 +544,12 @@ export default class AlphaCamera implements Physical {
     return this.speed;
   }
 
-  moveForward(elapsed:number) {
+  moveForward(elapsed: number) {
     const distance = elapsed * this.speed;
     this.warp(-distance);
   }
 
-  moveBackward(elapsed:number) {
+  moveBackward(elapsed: number) {
     const distance = elapsed * this.speed;
     this.warp(distance);
   }
@@ -563,7 +559,7 @@ export default class AlphaCamera implements Physical {
   // ------------------------------------------
 
   // CAMERAS MAKE THE BEST PARENTS
-  isGoodLineageFor(_:any) {
+  isGoodLineageFor(_: any) {
     return true;
   }
 
@@ -612,7 +608,7 @@ export default class AlphaCamera implements Physical {
     }
   }
 
-  setParent(parent:Physical) {
+  setParent(parent: Physical) {
     // setting the camera to itself sets it to an invisble physical
     if (this == parent) {
       this.disengage();
@@ -661,7 +657,7 @@ export default class AlphaCamera implements Physical {
   // C -> A -> B -> C
   // Stops:----^
   // Mults as (C * A * B):inverse()
-  getViewMatrix(requestor:Physical):AlphaRMatrix4 {
+  getViewMatrix(requestor: Physical): AlphaRMatrix4 {
     const parent = this.parent;
     if (requestor) {
       // the camera is always loaded first(properly)

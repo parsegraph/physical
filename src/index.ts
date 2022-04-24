@@ -4,13 +4,13 @@ import {
   alphaRandom,
   alphaGetTime,
   alphatoRadians,
-  alphaToDegrees
+  alphaToDegrees,
 } from "./Maths";
 
 import Physical from "./Physical";
-import BasicPhysical, {PhysicalMatrixMode} from "./BasicPhysical";
+import BasicPhysical, { PhysicalMatrixMode } from "./BasicPhysical";
 
-import AlphaQuaternion, {quaternionFromAxisAndAngle} from "./Quaternion";
+import AlphaQuaternion, { quaternionFromAxisAndAngle } from "./Quaternion";
 
 import AlphaRMatrix4, {
   alphaRMatrix4FromVectorAroundQuaternionAtVector,
@@ -18,10 +18,10 @@ import AlphaRMatrix4, {
   alphaRMatrix4FromEuler,
   alphaRMatrix4FromQuaternion,
   alphaRMatrix4FromQuaternionAtVector,
-  alphaRMatrix4FromVectorAroundQuaternion
+  alphaRMatrix4FromVectorAroundQuaternion,
 } from "./RMatrix4";
 
-import {FUZZINESS} from "./settings";
+import { FUZZINESS } from "./settings";
 
 import AlphaVector from "./Vector";
 
@@ -44,5 +44,5 @@ export {
   alphaRMatrix4FromQuaternionAtVector,
   alphaRMatrix4FromVectorAroundQuaternion,
   FUZZINESS,
-  AlphaVector
+  AlphaVector,
 };

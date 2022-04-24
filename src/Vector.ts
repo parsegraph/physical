@@ -1,12 +1,12 @@
-import {FUZZINESS} from "./settings";
+import { FUZZINESS } from "./settings";
 
 export default class AlphaVector {
-  "0":number;
-  "1":number;
-  "2":number;
-  length:number;
+  "0": number;
+  "1": number;
+  "2": number;
+  length: number;
 
-  constructor(...args:any) {
+  constructor(...args: any) {
     this[0] = 0;
     this[1] = 0;
     this[2] = 0;
@@ -19,9 +19,9 @@ export default class AlphaVector {
 
   toJSON() {
     return [this[0], this[1], this[2]];
-  };
+  }
 
-  restore(json:any) {
+  restore(json: any) {
     if (Array.isArray(json)) {
       this.set.apply(this, json);
     } else {
@@ -29,9 +29,9 @@ export default class AlphaVector {
       this[1] = json.y;
       this[2] = json.z;
     }
-  };
+  }
 
-  add(...args:any) {
+  add(...args: any) {
     if (args.length > 1) {
       this[0] += args[0];
       this[1] += args[1];
@@ -42,18 +42,18 @@ export default class AlphaVector {
       this[2] += args[0][2];
     }
     return this;
-  };
+  }
 
-  added(...args:any) {
+  added(...args: any) {
     const rv = this.clone();
     return rv.add.apply(rv, args);
-  };
+  }
 
   clone() {
     return new AlphaVector(this);
-  };
+  }
 
-  multiply(...args:any) {
+  multiply(...args: any) {
     if (args.length > 1) {
       this[0] *= args[0];
       this[1] *= args[1];
@@ -68,14 +68,14 @@ export default class AlphaVector {
       this[2] *= args[0][2];
     }
     return this;
-  };
+  }
 
-  multiplied(...args:any) {
+  multiplied(...args: any) {
     const rv = this.clone();
     return rv.multiply.apply(rv, args);
-  };
+  }
 
-  divide(...args:any) {
+  divide(...args: any) {
     if (args.length > 1) {
       this[0] /= args[0];
       this[1] /= args[1];
@@ -90,18 +90,18 @@ export default class AlphaVector {
       this[2] /= args[0][2];
     }
     return this;
-  };
+  }
 
-  divided(...args:any) {
+  divided(...args: any) {
     const rv = this.clone();
     return rv.divide.apply(rv, args);
-  };
+  }
 
-  get(i:number) {
+  get(i: number) {
     return (this as any)[i];
   }
 
-  equals(...args:any) {
+  equals(...args: any) {
     if (args.length > 1) {
       // .Equals(x, y, z)
       for (let i = 0; i < this.length; ++i) {
@@ -122,13 +122,13 @@ export default class AlphaVector {
 
     // Equals.
     return true;
-  };
+  }
 
-  setIndex(i:number, val: number) {
+  setIndex(i: number, val: number) {
     (this as any)[i] = val;
   }
 
-  set(...args:any) {
+  set(...args: any) {
     if (args.length > 1) {
       for (let i = 0; i < this.length; ++i) {
         this.setIndex(i, args[i]);
@@ -148,7 +148,7 @@ export default class AlphaVector {
       throw new Error("All components must be numbers");
     }
     return this;
-  };
+  }
 
   normalize() {
     const magnitude = this.magnitude();
@@ -157,32 +157,32 @@ export default class AlphaVector {
     }
 
     return this;
-  };
+  }
 
   normalized() {
     return this.clone().normalize();
-  };
+  }
 
   magnitude() {
     return Math.sqrt(this.dotProduct(this));
-  };
+  }
 
-  dotProduct(other:AlphaVector) {
+  dotProduct(other: AlphaVector) {
     return this[0] * other[0] + this[1] * other[1] + this[2] * other[2];
-  };
+  }
 
-  innerProduct(other:AlphaVector) {
+  innerProduct(other: AlphaVector) {
     return this.dotProduct(other);
   }
 
-  scalarProduct(other:AlphaVector) {
+  scalarProduct(other: AlphaVector) {
     return this.dotProduct(other);
   }
 
-  angleBetween(other:AlphaVector) {
+  angleBetween(other: AlphaVector) {
     const dot = this.dotProduct(other);
     return Math.acos(dot / (this.magnitude() * other.magnitude()));
-  };
+  }
 
   toString() {
     if (typeof this[0] != "number") {
@@ -195,5 +195,5 @@ export default class AlphaVector {
       throw new Error("All components must be numbers");
     }
     return "[" + this[0] + ", " + this[1] + ", " + this[2] + "]";
-  };
+  }
 }

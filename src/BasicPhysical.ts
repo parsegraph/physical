@@ -14,7 +14,7 @@
 import AlphaQuaternion from "./Quaternion";
 import AlphaRMatrix4 from "./RMatrix4";
 import AlphaVector from "./Vector";
-import {quaternionFromAxisAndAngle} from "./Quaternion";
+import { quaternionFromAxisAndAngle } from "./Quaternion";
 import Physical from "./Physical";
 
 // -----------------------------------
@@ -64,23 +64,23 @@ import Physical from "./Physical";
 export enum PhysicalMatrixMode {
   TRANSLATE_ROTATE_SCALE,
   SCALE_ROTATE_TRANSLATE,
-  ROTATE_TRANSLATE_SCALE
-};
+  ROTATE_TRANSLATE_SCALE,
+}
 
 export default class BasicPhysical implements Physical {
-  modelMode:PhysicalMatrixMode;
-  orientation:AlphaQuaternion;
-  position:AlphaVector;
-  modelMatrix:AlphaRMatrix4;
-  viewMatrix:AlphaRMatrix4;
-  modelDirty:boolean;
-  velocity:AlphaVector;
-  rotationSpeed:AlphaVector;
-  speed:AlphaVector;
-  scale:AlphaVector;
-  parent:Physical;
+  modelMode: PhysicalMatrixMode;
+  orientation: AlphaQuaternion;
+  position: AlphaVector;
+  modelMatrix: AlphaRMatrix4;
+  viewMatrix: AlphaRMatrix4;
+  modelDirty: boolean;
+  velocity: AlphaVector;
+  rotationSpeed: AlphaVector;
+  speed: AlphaVector;
+  scale: AlphaVector;
+  parent: Physical;
 
-  constructor(parent:Physical) {
+  constructor(parent: Physical) {
     this.modelMode = PhysicalMatrixMode.TRANSLATE_ROTATE_SCALE;
     this.orientation = new AlphaQuaternion();
     this.position = new AlphaVector();
@@ -99,36 +99,36 @@ export default class BasicPhysical implements Physical {
       position: this.position.toJSON(),
       orientation: this.orientation.toJSON(),
     };
-  };
+  }
 
-  setOrientation(...args:any) {
+  setOrientation(...args: any) {
     this.orientation.set(...args);
     this.modelDirty = true;
-  };
+  }
 
   /*
    * returns as Quaternion
    */
   getOrientation() {
     return this.orientation;
-  };
+  }
 
   /*
    * in radians / second
    */
-  setRotationSpeeds(...args:any) {
+  setRotationSpeeds(...args: any) {
     this.rotationSpeed.set(...args);
-  };
+  }
 
-  setRotationSpeed(...args:any) {
+  setRotationSpeed(...args: any) {
     this.setRotationSpeeds(...args);
   }
 
   getRotationSpeeds() {
     return this.rotationSpeed;
-  };
+  }
 
-  rotate(angle:number, x:number, y:number, z:number) {
+  rotate(angle: number, x: number, y: number, z: number) {
     // if you aren't rotating about an angle, then you aren't rotating
     if (angle == 0) {
       return;
@@ -136,9 +136,9 @@ export default class BasicPhysical implements Physical {
     const q = quaternionFromAxisAndAngle(x, y, z, angle);
     this.orientation.multiply(q);
     this.modelDirty = true;
-  };
+  }
 
-  rotateGlobal(angle:number, x:number, y:number, z:number) {
+  rotateGlobal(angle: number, x: number, y: number, z: number) {
     // if you aren't rotating about an angle, then you aren't rotating
     if (angle == 0) {
       return;
@@ -146,42 +146,42 @@ export default class BasicPhysical implements Physical {
     const q = quaternionFromAxisAndAngle(x, y, z, angle);
     this.orientation.set(q.multiply(this.orientation));
     this.modelDirty = true;
-  };
+  }
 
   /*
    * these rotations take place at the speeds set by rotationSpeed
    */
-  yawLeft(elapsed:number) {
+  yawLeft(elapsed: number) {
     const angle = elapsed * this.rotationSpeed[1];
     this.rotate(angle, 0, 1, 0);
-  };
+  }
 
-  yawRight(elapsed:number) {
+  yawRight(elapsed: number) {
     const angle = elapsed * this.rotationSpeed[1];
     this.rotate(-angle, 0, 1, 0);
-  };
+  }
 
-  pitchUp(elapsed:number) {
+  pitchUp(elapsed: number) {
     const angle = elapsed * this.rotationSpeed[0];
     this.rotate(angle, 1, 0, 0);
-  };
+  }
 
-  pitchDown(elapsed:number) {
+  pitchDown(elapsed: number) {
     const angle = elapsed * this.rotationSpeed[0];
     this.rotate(-angle, 1, 0, 0);
-  };
+  }
 
-  rollLeft(elapsed:number) {
+  rollLeft(elapsed: number) {
     const angle = elapsed * this.rotationSpeed[2];
     this.rotate(angle, 0, 0, 1);
-  };
+  }
 
-  rollRight(elapsed:number) {
+  rollRight(elapsed: number) {
     const angle = elapsed * this.rotationSpeed[2];
     this.rotate(-angle, 0, 0, 1);
-  };
+  }
 
-  turn(angle:number) {
+  turn(angle: number) {
     // if you aren't rotating about an angle, then you aren't rotating
     if (angle == 0) {
       return;
@@ -190,17 +190,17 @@ export default class BasicPhysical implements Physical {
     const q = new AlphaQuaternion();
     q.fromAxisAndAngle(0, 1, 0, angle);
     this.setOrientation(q.multiply(this.getOrientation()));
-  };
+  }
 
-  turnLeft(elapsed:number) {
+  turnLeft(elapsed: number) {
     const angle = elapsed * this.rotationSpeed[1];
     this.turn(angle);
-  };
+  }
 
-  turnRight(elapsed:number) {
+  turnRight(elapsed: number) {
     const angle = elapsed * this.rotationSpeed[1];
     this.turn(-angle);
-  };
+  }
 
   // -------------------------------------
   // ------------ POSITION ---------------
@@ -209,28 +209,28 @@ export default class BasicPhysical implements Physical {
   /*
    * send as x,y,z
    */
-  setPosition(...args:any) {
+  setPosition(...args: any) {
     if (Number.isNaN(this.position[0])) {
       throw new Error("Position became NaN.");
     }
     this.position.set.call(this.position, ...args);
     this.modelDirty = true;
-  };
+  }
 
   /*
    * return as Vector
    */
   getPosition() {
     return this.position;
-  };
+  }
 
-  changePosition(...args:any) {
+  changePosition(...args: any) {
     if (Number.isNaN(this.position[0])) {
       throw new Error("Position became NaN!");
     }
     this.position.add.call(this.position, ...args);
     this.modelDirty = true;
-  };
+  }
 
   // ------------------------------------------
   // -----------  MOVEMENT --------------------
@@ -240,7 +240,7 @@ export default class BasicPhysical implements Physical {
   /*
    * convertes the local x,y,z vector to the global position vector
    */
-  warp(...args:any) {
+  warp(...args: any) {
     let x;
     let y;
     let z;
@@ -266,104 +266,104 @@ export default class BasicPhysical implements Physical {
     // add it to our current position to get our new position
     // console.log("Warping vec" + d);
     this.changePosition(d);
-  };
+  }
 
   // these movement commands MOVE the physical
   // the physical's position is updated in the call
   // use the Move commands for player-commanded movement
-  warpForward(distance:number) {
+  warpForward(distance: number) {
     this.warp(0, 0, -distance);
-  };
+  }
 
-  warpBackward(distance:number) {
+  warpBackward(distance: number) {
     this.warp(0, 0, distance);
-  };
+  }
 
-  warpLeft(distance:number) {
+  warpLeft(distance: number) {
     this.warp(-distance, 0, 0);
-  };
+  }
 
-  warpRight(distance:number) {
+  warpRight(distance: number) {
     this.warp(distance, 0, 0);
-  };
+  }
 
-  warpUp(distance:number) {
+  warpUp(distance: number) {
     this.warp(0, distance, 0);
-  };
+  }
 
-  warpDown(distance:number) {
+  warpDown(distance: number) {
     this.warp(0, -distance, 0);
-  };
+  }
 
   // ------------------------------------------
   // -----------  VELOCITY --------------------
   // ------------------------------------------
 
   // speed is in units per second
-  setSpeeds(...args:any) {
+  setSpeeds(...args: any) {
     this.speed.set.call(this.speed, ...args);
-  };
+  }
 
   getSpeeds() {
     return this.speed;
-  };
+  }
 
-  setSpeed(speed:number) {
+  setSpeed(speed: number) {
     4;
     return this.setSpeeds(speed, speed, speed);
-  };
+  }
 
-  setVelocity(...args:any) {
+  setVelocity(...args: any) {
     this.velocity.set.call(this.velocity, ...args);
-  };
+  }
 
   getVelocity() {
     return this.velocity;
-  };
+  }
 
-  addVelocity(...args:any) {
+  addVelocity(...args: any) {
     this.velocity.add.call(this.velocity, ...args);
     this.modelDirty = true;
-  };
+  }
 
   // Move commands adjust the velocity
   // using the set speed
-  moveForward(elapsed:number) {
+  moveForward(elapsed: number) {
     const distance = elapsed * this.speed[2];
     this.addVelocity(0, 0, -distance);
-  };
+  }
 
-  moveBackward(elapsed:number) {
+  moveBackward(elapsed: number) {
     const distance = elapsed * this.speed[2];
     this.addVelocity(0, 0, distance);
-  };
+  }
 
-  moveLeft(elapsed:number) {
+  moveLeft(elapsed: number) {
     const distance = elapsed * this.speed[0];
     this.addVelocity(-distance, 0, 0);
-  };
+  }
 
-  moveRight(elapsed:number) {
+  moveRight(elapsed: number) {
     const distance = elapsed * this.speed[0];
     this.addVelocity(distance, 0, 0);
-  };
+  }
 
-  moveUp(elapsed:number) {
+  moveUp(elapsed: number) {
     const distance = elapsed * this.speed[1];
     this.addVelocity(0, distance, 0);
-  };
+  }
 
-  moveDown(elapsed:number) {
+  moveDown(elapsed: number) {
     const distance = elapsed * this.speed[1];
     this.addVelocity(0, -distance, 0);
-  };
+  }
 
   // calculates our new position using our current velocity
   // and then resets the velocity
   applyVelocity() {
     this.warp(this.velocity);
     this.velocity.set(0, 0, 0);
-  };
+  }
 
   // ------------------------------------------
   // --------------  PARENTING ----------------
@@ -372,7 +372,7 @@ export default class BasicPhysical implements Physical {
   // in order to be a good lineage:
   // a camera must be reached
   // // therefore it must not infinitely loop
-  isGoodLineageFor(prospectiveChild:Physical):boolean {
+  isGoodLineageFor(prospectiveChild: Physical): boolean {
     const parent = this.getParent();
 
     // no parent = no lineage
@@ -388,9 +388,9 @@ export default class BasicPhysical implements Physical {
     }
 
     return parent.isGoodLineageFor(prospectiveChild);
-  };
+  }
 
-  setParent(parent:Physical) {
+  setParent(parent: Physical) {
     if (!parent) {
       throw new Error(
         "A Physical must have a parent. set it to the camera for a default"
@@ -403,24 +403,24 @@ export default class BasicPhysical implements Physical {
       );
     }
     this.parent = parent;
-  };
+  }
 
   getParent() {
     return this.parent;
-  };
+  }
 
   // ------------------------------------------
   // -----------  MODELVIEW MATRIX ------------
   // ------------------------------------------
 
-  setScale(...args:number[]) {
+  setScale(...args: number[]) {
     this.scale.set(...args);
     this.modelDirty = true;
-  };
+  }
 
   getScale() {
     return this.scale;
-  };
+  }
 
   // combine our position and orientation into a matrix;
   getModelMatrix() {
@@ -466,7 +466,7 @@ export default class BasicPhysical implements Physical {
     }
 
     return this.modelMatrix;
-  };
+  }
 
   // when fully returned it looks like this
   // A -> B -> CAM -> A -> B
@@ -510,7 +510,7 @@ export default class BasicPhysical implements Physical {
   // it starts with a simple camera:CalculateViewMatrices();
   // I will return to this.
 
-  getViewMatrix(...args:any) {
+  getViewMatrix(...args: any) {
     // if this was just called then we need to set who sent it
     let requestor;
     if (args.length == 0) {
@@ -527,7 +527,7 @@ export default class BasicPhysical implements Physical {
     } else {
       return this.getModelMatrix().inverse();
     }
-  };
+  }
 
   getWorldPositionByViewMatrix() {
     return new AlphaRMatrix4([
@@ -548,11 +548,11 @@ export default class BasicPhysical implements Physical {
       this.position[2],
       1,
     ]).multiply(this.getViewMatrix().inverse());
-  };
+  }
 
   // legacy code; left in case I try this again
   // it does not work correctly, in all cases
-  getWorldPosition(requestor:Physical):AlphaVector {
+  getWorldPosition(requestor: Physical): AlphaVector {
     const parent = this.parent;
     if (parent && parent != requestor) {
       const rot = parent.getWorldOrientation(requestor);
@@ -560,15 +560,15 @@ export default class BasicPhysical implements Physical {
       return pos.add(parent.getWorldPosition(requestor));
     }
     return this.position;
-  };
+  }
 
   // legacy code; left in case I try this again
   // it DOES work
-  getWorldOrientation(requestor:Physical):AlphaQuaternion {
+  getWorldOrientation(requestor: Physical): AlphaQuaternion {
     const parent = this.parent;
     if (parent && parent != requestor) {
       return parent.getWorldOrientation(requestor).multiplied(this.orientation);
     }
     return this.orientation;
-  };
+  }
 }

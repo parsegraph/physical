@@ -1,14 +1,14 @@
 import AlphaVector from "./Vector";
-import {FUZZINESS} from "./settings";
+import { FUZZINESS } from "./settings";
 
 export default class AlphaQuaternion {
-  "0":number;
-  "1":number;
-  "2":number;
-  "3":number;
+  "0": number;
+  "1": number;
+  "2": number;
+  "3": number;
   length: number;
 
-  constructor(...args:any) {
+  constructor(...args: any) {
     this[0] = 0;
     this[1] = 0;
     this[2] = 0;
@@ -22,9 +22,9 @@ export default class AlphaQuaternion {
 
   toJSON() {
     return [this[0], this[1], this[2], this[3]];
-  };
+  }
 
-  restore(json:any) {
+  restore(json: any) {
     if (Array.isArray(json)) {
       this.set.apply(this, json);
     } else {
@@ -33,13 +33,13 @@ export default class AlphaQuaternion {
       this[2] = json.z;
       this[3] = json.w;
     }
-  };
+  }
 
   clone() {
     return new AlphaQuaternion(this);
-  };
+  }
 
-  multiply(...args:any) {
+  multiply(...args: any) {
     if (arguments.length == 1 && typeof args[0] === "number") {
       this[0] *= args[0];
       this[1] *= args[0];
@@ -75,17 +75,17 @@ export default class AlphaQuaternion {
     this[3] = aw * bw - ax * bx - ay * by - az * bz;
 
     return this;
-  };
+  }
 
-  multiplied(...args:any) {
+  multiplied(...args: any) {
     const rv = this.clone();
     return rv.multiply.apply(rv, args);
-  };
+  }
 
   // really this could use a few tweaks
   // negatives can be the same rotation
   // (different paths)
-  equals(...args:any) {
+  equals(...args: any) {
     if (args.length > 1) {
       for (let i = 0; i < this.length; ++i) {
         if (Math.abs(this.get(i) - args[i]) > FUZZINESS) {
@@ -104,7 +104,7 @@ export default class AlphaQuaternion {
 
     // Equals.
     return true;
-  };
+  }
 
   x() {
     return (this as any)[0];
@@ -128,7 +128,7 @@ export default class AlphaQuaternion {
     const y = this.y();
     const z = this.z();
     return Math.sqrt(w * w + x * x + y * y + z * z);
-  };
+  }
 
   norm() {
     return this.magnitude();
@@ -140,13 +140,13 @@ export default class AlphaQuaternion {
       this.multiply(1 / magnitude);
     }
     return this;
-  };
+  }
 
   setIndex(i: number, num: number) {
     (this as any)[i] = num;
   }
 
-  set(...args:any) {
+  set(...args: any) {
     const w = this[3];
 
     if (args.length > 1) {
@@ -163,14 +163,14 @@ export default class AlphaQuaternion {
       this[3] = w;
     }
     return this;
-  };
+  }
 
   /*
    * Returns a new quaternion that represents the conjugate of this quaternion.
    */
   conjugate() {
     return new AlphaQuaternion(-this[0], -this[1], -this[2], this[3]);
-  };
+  }
 
   inverse() {
     // actual inverse is q.Conjugate() / Math.pow(Math.abs(q.Magnitude()), 2)
@@ -179,7 +179,7 @@ export default class AlphaQuaternion {
 
     this.normalize();
     return this.conjugate();
-  };
+  }
 
   toAxisAndAngle() {
     const w = this[3];
@@ -199,9 +199,9 @@ export default class AlphaQuaternion {
       z = x / s;
     }
     return [new AlphaVector(x, y, z), angle];
-  };
+  }
 
-  fromAxisAndAngle(...args:any) {
+  fromAxisAndAngle(...args: any) {
     let angle;
     const axis = new AlphaVector();
     if (args.length == 2) {
@@ -225,25 +225,25 @@ export default class AlphaQuaternion {
     this[3] = Math.cos(angle);
 
     return this;
-  };
+  }
 
   get(i: number) {
     return (this as any)[i];
   }
 
-  dotProduct(other:AlphaQuaternion) {
+  dotProduct(other: AlphaQuaternion) {
     let rv = 0;
     for (let i = 0; i < this.length; ++i) {
       rv += this.get(i) * other.get(i);
     }
     return rv;
-  };
+  }
 
-  scalarProduct(other:AlphaQuaternion) {
+  scalarProduct(other: AlphaQuaternion) {
     return this.dotProduct(other);
   }
 
-  innerProduct(other:AlphaQuaternion) {
+  innerProduct(other: AlphaQuaternion) {
     return this.dotProduct(other);
   }
 
@@ -253,7 +253,7 @@ export default class AlphaQuaternion {
   // so its been optimized to hell and back
   // a more normal, and decently optimized version is found next
   // this version is about 2x faster than RotatedVector2
-  rotatedVector(...args:any) {
+  rotatedVector(...args: any) {
     let x;
     let y;
     let z;
@@ -269,9 +269,9 @@ export default class AlphaQuaternion {
     }
     this.rotatedVectorEach(vec, x, y, z);
     return vec;
-  };
+  }
 
-  rotatedVectorEach(outVec:AlphaVector, x:number, y:number, z:number) {
+  rotatedVectorEach(outVec: AlphaVector, x: number, y: number, z: number) {
     let aw = 0;
     let ax = x;
     let ay = y;
@@ -309,7 +309,7 @@ export default class AlphaQuaternion {
       aw * by - ax * bz + ay * bw + az * bx,
       aw * bz + ax * by - ay * bx + az * bw
     );
-  };
+  }
 
   toString() {
     return (
@@ -323,17 +323,17 @@ export default class AlphaQuaternion {
       this[3] +
       "}"
     );
-  };
+  }
 
-  angleBetween(other:AlphaQuaternion) {
+  angleBetween(other: AlphaQuaternion) {
     this.normalize();
     other.normalize();
     const dot = this.dotProduct(other);
     return 2 * Math.acos(dot / (this.magnitude() * other.magnitude()));
-  };
+  }
 }
 
-export function quaternionFromAxisAndAngle(...args:any) {
+export function quaternionFromAxisAndAngle(...args: any) {
   const quat = new AlphaQuaternion(0, 0, 0, 1);
   return quat.fromAxisAndAngle.apply(quat, args);
 }
