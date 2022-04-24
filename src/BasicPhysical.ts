@@ -525,7 +525,7 @@ export default class BasicPhysical implements Physical {
       );
       return this.viewMatrix;
     } else {
-      return this.getModelMatrix().inverse();
+      return this.getModelMatrix().inversed();
     }
   }
 
