@@ -450,7 +450,9 @@ export default class AlphaCamera implements Physical {
 
   // offset from the physical
   setOffset(...args: any[]) {
-    let x, y, z: number;
+    let x;
+    let y;
+    let z: number;
     if (args.length === 1) {
       y = args[0][1];
       z = args[0][2];
@@ -470,7 +472,9 @@ export default class AlphaCamera implements Physical {
   }
 
   changeOffset(...args: any) {
-    let x, y, z: number;
+    let x;
+    let y;
+    let z: number;
     if (args.length === 1) {
       y = args[0][1];
       z = args[0][2];

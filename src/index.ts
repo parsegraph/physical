@@ -1,4 +1,4 @@
-import AlphaCamera from "./Cam";
+import AlphaCamera from "./Camera";
 
 import {
   alphaRandom,
