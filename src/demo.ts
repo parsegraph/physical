@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   root.style.position = "relative";
 
   const container = document.createElement("div");
-  container.innerHTML = `Physical`
+  container.innerHTML = `Physical`;
   container.style.position = "absolute";
   container.style.left = "0px";
   container.style.top = "0px";

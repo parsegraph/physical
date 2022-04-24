@@ -10,7 +10,7 @@ export default interface Physical {
   isGoodLineageFor(prospectiveChild: Physical): boolean;
   getPosition(): AlphaVector;
   getOrientation(): AlphaQuaternion;
-  setOrientation(...args: any):void;
+  setOrientation(...args: any): void;
   getWorldOrientation(requestor: Physical): AlphaQuaternion;
   getWorldPosition(requestor: Physical): AlphaVector;
 }

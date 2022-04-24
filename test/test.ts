@@ -4,7 +4,7 @@ import { makePerspective } from "parsegraph-matrix";
 import TestSuite from "parsegraph-testsuite";
 import AlphaVector from "../src/Vector";
 import AlphaRMatrix4 from "../src/RMatrix4";
-import AlphaQuaternion, {quaternionFromAxisAndAngle} from "../src/Quaternion";
+import AlphaQuaternion, { quaternionFromAxisAndAngle } from "../src/Quaternion";
 import Camera from "../src/Camera";
 import BasicPhysical from "../src/BasicPhysical";
 
@@ -14,7 +14,7 @@ describe("Package", function () {
     const p = new BasicPhysical(cam);
   });
 
-  it("passes Vector tests", ()=>{
+  it("passes Vector tests", () => {
     const alphaVectorTests = new TestSuite("AlphaVector");
 
     alphaVectorTests.addTest("AlphaVector.<constructor>", function () {
@@ -83,7 +83,7 @@ describe("Package", function () {
     alphaVectorTests.addTest("AlphaVector.normalize", function () {
       const a = new AlphaVector(3, 4, 0);
       a.normalize();
-      if (a.magnitude()!= 1) {
+      if (a.magnitude() != 1) {
         return "normalize must create a vector of length one.";
       }
 
@@ -120,7 +120,7 @@ describe("Package", function () {
     assert(alphaVectorTests.run().isSuccessful());
   });
 
-  it("passes Quaternion tests", ()=>{
+  it("passes Quaternion tests", () => {
     const alphaQuaternionTests = new TestSuite("AlphaQuaternion");
 
     alphaQuaternionTests.addTest(
@@ -146,7 +146,9 @@ describe("Package", function () {
         !fuzzyEquals(quat[3], 0.7071, 10e-2)
       ) {
         throw new Error(
-          "Quaternion " + quat + " does not match expected (0.7071, 0, 0, 0.7071)"
+          "Quaternion " +
+            quat +
+            " does not match expected (0.7071, 0, 0, 0.7071)"
         );
       }
     });
@@ -188,10 +190,10 @@ describe("Package", function () {
     assert(alphaQuaternionTests.run().isSuccessful());
   });
 
-  it("passes Matrix tests", ()=>{
+  it("passes Matrix tests", () => {
     const alphaRMatrix4Tests = new TestSuite("AlphaRMatrix4");
 
-    alphaRMatrix4Tests.addTest("AlphaRMatrix4.multiply", ()=>{
+    alphaRMatrix4Tests.addTest("AlphaRMatrix4.multiply", () => {
       const m = new AlphaRMatrix4(
         2,
         3,
@@ -310,7 +312,9 @@ describe("Package", function () {
       m.scale(2, 3, 4);
 
       if (
-        !m.equals(new AlphaRMatrix4(2, 0, 0, 0, 0, 3, 0, 0, 0, 0, 4, 0, 0, 0, 0, 1))
+        !m.equals(
+          new AlphaRMatrix4(2, 0, 0, 0, 0, 3, 0, 0, 0, 0, 4, 0, 0, 0, 0, 1)
+        )
       ) {
         return m.toString();
       }
@@ -323,14 +327,18 @@ describe("Package", function () {
       m.translate(2, 3, 4);
 
       if (
-        !m.equals(new AlphaRMatrix4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 2, 3, 4, 1))
+        !m.equals(
+          new AlphaRMatrix4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 2, 3, 4, 1)
+        )
       ) {
         return m.toString();
       }
 
       m.translate(2, 3, 4);
       if (
-        !m.equals(new AlphaRMatrix4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 4, 6, 8, 1))
+        !m.equals(
+          new AlphaRMatrix4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 4, 6, 8, 1)
+        )
       ) {
         return m.toString();
       }
@@ -354,8 +362,25 @@ describe("Package", function () {
 
     alphaRMatrix4Tests.addTest(
       "Does AlphaRMatrix4.inverse even work for simple things?",
-      ()=>{
-        const m = new AlphaRMatrix4(2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2);
+      () => {
+        const m = new AlphaRMatrix4(
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          2
+        );
         const expected = new AlphaRMatrix4(
           0.5,
           0,
@@ -382,8 +407,25 @@ describe("Package", function () {
 
     alphaRMatrix4Tests.addTest(
       "Does AlphaRMatrix4.inverse work for zero-determinants?",
-      ()=>{
-        const m = new AlphaRMatrix4(2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0);
+      () => {
+        const m = new AlphaRMatrix4(
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0
+        );
         try {
           m.inverse();
           return "inverse shouldn't succeed.";
@@ -451,14 +493,13 @@ describe("Package", function () {
       }
     );
 
-    const tr = alphaRMatrix4Tests.run((...args:any)=>{
+    const tr = alphaRMatrix4Tests.run((...args: any) => {
       if (args[0] === "TestFinished") {
         return;
       }
-      //console.log(...args);
+      // console.log(...args);
     });
     console.log(tr.toString());
     assert(tr.isSuccessful());
   });
 });
-
