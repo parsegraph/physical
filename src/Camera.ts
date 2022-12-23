@@ -424,8 +424,9 @@ export default class AlphaCamera implements Physical {
     // console.log(new Error("Setting position to " + x + " " + y + " " + z));
     if (args.length === 1) {
       this.position.set(args[0][1], args[0][2], args[0][0]);
+    } else {
+      this.position.set(args[0], args[1], args[2]);
     }
-    this.position.set(args[0], args[1], args[2]);
     this.modelDirty = true;
     return this.position;
   }
