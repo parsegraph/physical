@@ -48,9 +48,9 @@
     "webpack-cli": "^4.9.2"
   },
   "dependencies": {
-    "parsegraph-fuzzyequals": "^1.4.9",
-    "parsegraph-matrix": "^1.4.12",
-    "parsegraph-testsuite": "^1.6.2",
-    "parsegraph-toradians": "^1.4.9"
+    "parsegraph-fuzzyequals": "^1.4.10",
+    "parsegraph-matrix": "^1.4.13",
+    "parsegraph-testsuite": "^1.6.3",
+    "parsegraph-toradians": "^1.4.10"
   }
 }
