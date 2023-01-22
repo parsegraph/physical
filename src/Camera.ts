@@ -260,7 +260,7 @@ export default class AlphaCamera implements Physical {
   // -------------------------------------
 
   setOrientation(...args: any) {
-    this.orientation.set(this.orientation, ...args);
+    this.orientation.set(...args);
     this.modelDirty = true;
   }
 
