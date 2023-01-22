@@ -3921,6 +3921,11 @@ parsegraph-matrix@^1.4.14:
   resolved "https://registry.yarnpkg.com/parsegraph-matrix/-/parsegraph-matrix-1.4.14.tgz#e84d740c95d3e2c4f9e4b68c73e2d7b2d2a4a143"
   integrity sha512-xuvuRJ3aYGvcImYqkLLPKBs32LzYnukz5dkNscq+6j7rLl4DDd7hl0zP/V7ETi/NN74f32gDhd0kBICdvDRMLw==
 
+parsegraph-testsuite@^1.6.4:
+  version "1.6.4"
+  resolved "https://registry.yarnpkg.com/parsegraph-testsuite/-/parsegraph-testsuite-1.6.4.tgz#e54c6d6c712da96ec52f84fdf5d57562fc067af7"
+  integrity sha512-oqQY2LeAvgN3UOFQUHwR8H1TUNXRUeL0AlFZAugrPL0XY21MAK2Z9UmnQMElGJ8X+/9Hcsu/G92A7vkbxxglag==
+
 parsegraph-toradians@^1.4.10:
   version "1.4.10"
   resolved "https://registry.yarnpkg.com/parsegraph-toradians/-/parsegraph-toradians-1.4.10.tgz#e79797c2af66f47c0760c7ab8d8ae18ca35a4a9f"
