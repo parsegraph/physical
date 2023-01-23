@@ -3926,10 +3926,10 @@ parsegraph-testsuite@^1.6.4:
   resolved "https://registry.yarnpkg.com/parsegraph-testsuite/-/parsegraph-testsuite-1.6.4.tgz#e54c6d6c712da96ec52f84fdf5d57562fc067af7"
   integrity sha512-oqQY2LeAvgN3UOFQUHwR8H1TUNXRUeL0AlFZAugrPL0XY21MAK2Z9UmnQMElGJ8X+/9Hcsu/G92A7vkbxxglag==
 
-parsegraph-toradians@^1.4.11:
-  version "1.4.11"
-  resolved "https://registry.yarnpkg.com/parsegraph-toradians/-/parsegraph-toradians-1.4.11.tgz#d2d630bc739b4569818143e6b70c49fe6d78a82a"
-  integrity sha512-crT1jT4KswxcNlfVUGkLDCh9yOpMHB/wFFaBN4HWq9SJIfo5+Dk7pghBr/JcKLmgRq2rLKOdLLqu75SwIOY/9Q==
+parsegraph-toradians@^1.4.12:
+  version "1.4.12"
+  resolved "https://registry.yarnpkg.com/parsegraph-toradians/-/parsegraph-toradians-1.4.12.tgz#5c342a4c3a8f5daeb7e57a2823ac5a4eda9eae67"
+  integrity sha512-sHNS62fCk3OsYHEav59pe+s3n2gpWhIjH6zKsi4Uibl1ZdW7C7xe9RMLJonfsrliyneYytcmBJ/hPfQVZxl+HA==
 
 path-exists@^3.0.0:
   version "3.0.0"
