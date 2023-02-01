@@ -51,7 +51,6 @@
   "dependencies": {
     "parsegraph-fuzzyequals": "^1.4.13",
     "parsegraph-matrix": "^1.4.16",
-    "parsegraph-testsuite": "^1.6.5",
     "parsegraph-toradians": "^1.4.13"
   }
 }
