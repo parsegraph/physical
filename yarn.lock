@@ -3913,25 +3913,25 @@ parse5@^7.0.0, parse5@^7.1.1:
   dependencies:
     entities "^4.4.0"
 
-parsegraph-fuzzyequals@^1.4.12:
-  version "1.4.12"
-  resolved "https://registry.yarnpkg.com/parsegraph-fuzzyequals/-/parsegraph-fuzzyequals-1.4.12.tgz#fbeea56695104a3791b3ba194ad589d85281a75c"
-  integrity sha512-rpI9Pb0wt8DiVOl1Cvw4kTjs+KjRSS7ktNeGuMz2h4dPEOM1WmhKVjixomYh/PY3VMjbm9xhzZDYG0jaBsZlRg==
+parsegraph-fuzzyequals@^1.4.13:
+  version "1.4.13"
+  resolved "https://registry.yarnpkg.com/parsegraph-fuzzyequals/-/parsegraph-fuzzyequals-1.4.13.tgz#4012ee7d7e0c0941d74f6ddfb319bb85e8c52472"
+  integrity sha512-xwYwLNLPfW3dG5SnttK47BPmERztlbmZe42ivTjV4N5UJMwdQ+CozArqywJklxf9XAgo7WtyNTAVYgqRU3EqyA==
 
-parsegraph-matrix@^1.4.15:
-  version "1.4.15"
-  resolved "https://registry.yarnpkg.com/parsegraph-matrix/-/parsegraph-matrix-1.4.15.tgz#7af28a980ca7c3274954e69f7a2d6beb7c79ccdf"
-  integrity sha512-1sTQoPFD00trS/PJ92Nt6xSBB1F9WYFVH+vuEodtIlw3X6vhb53e4dv1UV26noekGwTkgURia2djNUcGj3wNeA==
+parsegraph-matrix@^1.4.16:
+  version "1.4.16"
+  resolved "https://registry.yarnpkg.com/parsegraph-matrix/-/parsegraph-matrix-1.4.16.tgz#fdd73c1dd51620359a53a7bc105ea0eb681cfbf8"
+  integrity sha512-eMyYggFEY+k6xEswZu5OnbrXh9LKiBPJETOfGp53qL/Qm84Or1nrMAGt9d4Y6PEQvq1T2kLd6LuKBQF2ijIGbw==
 
 parsegraph-testsuite@^1.6.5:
   version "1.6.5"
   resolved "https://registry.yarnpkg.com/parsegraph-testsuite/-/parsegraph-testsuite-1.6.5.tgz#92c2e4b8b11f7e16b599e2eeff8beafb99ac4a94"
   integrity sha512-r4yyE6CBKVHmO2aQ4ulS1eHEx3ySUQ5lrubysuEkoiSj79u7kKNK5l7I2WCFxghrdfrMc/5rzlK0ZPkURVCWwA==
 
-parsegraph-toradians@^1.4.12:
-  version "1.4.12"
-  resolved "https://registry.yarnpkg.com/parsegraph-toradians/-/parsegraph-toradians-1.4.12.tgz#5c342a4c3a8f5daeb7e57a2823ac5a4eda9eae67"
-  integrity sha512-sHNS62fCk3OsYHEav59pe+s3n2gpWhIjH6zKsi4Uibl1ZdW7C7xe9RMLJonfsrliyneYytcmBJ/hPfQVZxl+HA==
+parsegraph-toradians@^1.4.13:
+  version "1.4.13"
+  resolved "https://registry.yarnpkg.com/parsegraph-toradians/-/parsegraph-toradians-1.4.13.tgz#599d87accb5a1edae1f64e1693289eec17621123"
+  integrity sha512-j02kgbAn6NK3xz+lmj67pVe5Wn/kcIyrOWhs++Mo/+9q5/StF76dV6qMwwu3w6QStetV3rJMlwSH2I6gpUiuGg==
 
 path-exists@^3.0.0:
   version "3.0.0"
